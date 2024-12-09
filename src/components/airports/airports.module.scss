@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-self: stretch;
+	padding: 10px 10px 30px;
+
+	&[data-current ='false'] {
+		align-items: flex-end;
+		.h4 {
+			justify-content: flex-end;
+		}
+		.time {
+			justify-content: flex-end;
+			align-self: flex-end;
+		}
+	}
+}
+
+.h4 {
+	flex-wrap: nowrap;
+	text-wrap: nowrap;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+
+.time {
+	display: flex;
+	font-size: 30px;
+	font-weight: 400;
+}
+
+.date {
+	flex-wrap: nowrap;
+	text-wrap: nowrap;
+	opacity: 0.5;
+	font-size: 11px;
+}
