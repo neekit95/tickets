@@ -36,8 +36,11 @@
 	&:hover {
 		transition: box-shadow 0.3s;
 		box-shadow: rgb(218, 179, 177) 0 2px 2px;
+		background-color: #ff8222;
+
 	}
 	&:active {
+		background-color: #f87513;
 		transition: box-shadow 0.3s;
 		box-shadow: rgb(215, 96, 87) 0 2px 2px;
 	}

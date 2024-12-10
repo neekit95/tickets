@@ -3,14 +3,16 @@ import style from './navbar.module.scss';
 
 type NavbarProps = {
 	onStopsChange: (stops: number[] | null) => void;
+	onCurrencyChange: (currency: string) => void;
 };
 
-const Navbar = ({ onStopsChange }: NavbarProps) => {
+const Navbar = ({ onStopsChange, onCurrencyChange }: NavbarProps) => {
 	const [activeCurrency, setActiveCurrency] = useState('RUB');
 	const [selectedStops, setSelectedStops] = useState<number[]>([]);
 
 	const handleCurrencyChange = (currency: string) => {
 		setActiveCurrency(currency);
+		onCurrencyChange(currency);
 	};
 
 	const handleStopsChange = (stop: number) => {
@@ -20,6 +22,11 @@ const Navbar = ({ onStopsChange }: NavbarProps) => {
 
 		setSelectedStops(newSelectedStops);
 		onStopsChange(newSelectedStops.length > 0 ? newSelectedStops : null);
+	};
+
+	const resetFilters = () => {
+		setSelectedStops([]);
+		onStopsChange(null);
 	};
 
 	return (
@@ -47,7 +54,6 @@ const Navbar = ({ onStopsChange }: NavbarProps) => {
 						checked={selectedStops.includes(0)}
 					/>
 					<span></span>
-
 					Без пересадок
 				</label>
 				<label>
@@ -78,6 +84,10 @@ const Navbar = ({ onStopsChange }: NavbarProps) => {
 					3 пересадки
 				</label>
 			</div>
+
+			<button className={style.resetButton} onClick={resetFilters}>
+				Сбросить фильтры
+			</button>
 		</div>
 	);
 };

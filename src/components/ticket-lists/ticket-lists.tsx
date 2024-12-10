@@ -19,9 +19,10 @@ type TicketData = {
 type TicketListsProps = {
 	list: TicketData[][];
 	selectedStops: number[] | null;
+	currency: string;
 };
 
-const TicketLists = ({ list, selectedStops }: TicketListsProps) => {
+const TicketLists = ({ list, selectedStops, currency }: TicketListsProps) => {
 
 	const filteredList = selectedStops
 		? list[0].filter((ticket) => selectedStops.includes(ticket.stops))
@@ -44,6 +45,7 @@ const TicketLists = ({ list, selectedStops }: TicketListsProps) => {
 						originName={elem.origin_name}
 						price={elem.price}
 						stops={elem.stops}
+						currency={currency}
 					/>
 				</div>
 			))}

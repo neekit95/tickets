@@ -7,16 +7,28 @@ import lists from '../../utils/tickets.json';
 
 function App() {
     const [selectedStops, setSelectedStops] = useState<number[] | null>(null);
+    const [currency, setCurrency] = useState('RUB');
 
     const handleStopsChange = (stops: number[] | null) => {
         setSelectedStops(stops);
     };
 
+    const handleCurrencyChange = (currency: string) => {
+        setCurrency(currency);
+    };
+
     return (
         <div className={style.container}>
             <Wrapper>
-                <Navbar onStopsChange={handleStopsChange} />
-                <TicketLists list={Object.values(lists)} selectedStops={selectedStops} />
+                <Navbar
+                    onStopsChange={handleStopsChange}
+                    onCurrencyChange={handleCurrencyChange}
+                />
+                <TicketLists
+                    list={Object.values(lists)}
+                    selectedStops={selectedStops}
+                    currency={currency}
+                />
             </Wrapper>
         </div>
     );

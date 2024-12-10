@@ -14,7 +14,8 @@ type Props = {
 	origin: string,
 	originName: string,
 	price: number,
-	stops: number
+	stops: number,
+	currency: string
 }
 
 const Ticket = ({
@@ -28,7 +29,8 @@ const Ticket = ({
 	origin,
 	originName,
 	price,
-	stops
+	stops,
+	currency
 }: Props) => {
 	let stopWord: string;
 
@@ -43,20 +45,28 @@ const Ticket = ({
 		stopWord = "ПЕРЕСАДОК";
 	}
 
-	console.log(`${stops} ${stopWord}`);
+	const currencyRates: Record<string, number> = {
+		RUB: 1,
+		USD: 1 / 99.38,
+		EUR: 1 / 105.1,
+	};
+
+	const currencySymbols: Record<string, string> = {
+		RUB: '₽',
+		USD: '$',
+		EUR: '€',
+	};
+
+	const convertedPrice = Math.round(price * (currencyRates[currency] || 1));
+	const currencySymbol = currencySymbols[currency] || '';
 
 	return (
 		<div className={style.container}>
 			<div className={style.left}>
-				<h3 className={style.carrier}>
-					{carrier}
-				</h3>
-
+				<h3 className={style.carrier}>{carrier}</h3>
 				<button className={style.button}>
-					Купить
-					<br/>
-					за {' '}
-					{new Intl.NumberFormat('ru-Ru').format(price)}₽
+					Купить<br/>
+					за {new Intl.NumberFormat('ru-RU').format(convertedPrice)} {currencySymbol}
 				</button>
 			</div>
 
